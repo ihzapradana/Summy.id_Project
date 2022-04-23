@@ -1,0 +1,148 @@
+html,body {
+	height: 100%;
+}
+
+body.login-page {
+	background-color:#363740;
+	font-size: 14px;
+}
+
+.login-page .brand {
+	width: 90px;
+	height: 90px;
+	overflow: hidden;
+	margin: 10px auto;
+	position: relative;
+	z-index: 1;
+}
+
+.login-page .brand img {
+	width: 100%;
+}
+
+.login-page .card-wrapper {
+	width: 400px;
+	margin: 30px auto;
+}
+
+.login-page .card {
+	border-color: transparent;
+	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+}
+
+.login-page .card.fat {
+	padding: 10px;
+}
+
+.login-page .card .card-title {
+	margin-bottom: 25px;
+	text-align: center;
+	color: grey;
+}
+
+.login-page .card .continue {
+	text-align: center;
+}
+
+.login-page .card .enter{
+	color: grey;
+	text-align: center;
+}
+
+.login-page .form-control {
+	border-width: 2.3px;
+}
+
+.login-page .form-group label {
+	width: 100%;
+	color: grey;
+}
+
+.login-page .btn.btn-block {
+	padding: 12px 10px;
+	border-color: #3751FF;
+}
+
+@media screen and (max-width: 425px) {
+	.login-page .card-wrapper {
+		width: 90%;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.login-page .card.fat {
+		padding: 0;
+	}
+
+	.login-page .card.fat .card-body {
+		padding: 15px;
+	}
+}
+
+html,body {
+	height: 100%;
+}
+
+body.signup-page {
+	background-color:#363740;
+	font-size: 14px;
+}
+
+
+.signup-page .card-wrapper {
+	width: 400px;
+    margin: 30px auto;
+}
+
+.signup-page .card {
+	border-color: transparent;
+	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+}
+
+.signup-page .card.fat {
+	padding: 10px;
+}
+
+.signup-page .card .card-title {
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.signup-page .form-control {
+	border-width: 2.3px;
+	margin: 1px auto;
+}
+
+.signup-page .form-group label {
+	width: 100%;
+	color: grey;
+}
+
+.signup-page .btn.btn-block {
+	padding: 12px 10px;
+	border-color: #3751FF;
+}
+
+.signup-page .footer {
+	margin: 40px 0;
+	color: #888;
+	text-align: center;
+}
+
+@media screen and (max-width: 425px) {
+	.signup-page .card-wrapper {
+		width: 90%;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.signup-page .card.fat {
+		padding: 0;
+	}
+
+	.signup-page .card.fat .card-body {
+		padding: 15px;
+	}
+}
