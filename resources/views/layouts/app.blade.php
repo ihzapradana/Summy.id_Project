@@ -51,12 +51,14 @@
 								class="align-middle">Dashboard</span>
 						</a>
 					</li>
-					<li class="sidebar-item @if (Route::is('petani.*')) active @endif">
-						<a class="sidebar-link" href="{{ Route('petani.index') }}">
-							<i class="align-middle" data-feather="sliders"></i> <span
-								class="align-middle">Petani</span>
-						</a>
-					</li>
+					@if (Auth::user()->role == 'owner')						
+						<li class="sidebar-item @if (Route::is('petani.*')) active @endif">
+							<a class="sidebar-link" href="{{ Route('petani.index') }}">
+								<i class="align-middle" data-feather="sliders"></i> <span
+									class="align-middle">Petani</span>
+							</a>
+						</li>
+					@endif
 
 					<li class="sidebar-item @if (Route::is('laporan.*')) active @endif">
 						<a class="sidebar-link" href="/laporan">

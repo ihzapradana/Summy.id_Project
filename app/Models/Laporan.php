@@ -9,5 +9,11 @@ class Laporan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date', 'name', 'description', 'photo'];
+    protected $fillable = ['description', 'photo'];
+
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

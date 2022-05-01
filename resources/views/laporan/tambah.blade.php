@@ -20,24 +20,18 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('laporan.store') }}">
+                        <form method="post" action="{{ route('laporan.store') }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="mb-3">
-                                <label for="name" class="form-label">NAME</label>
-                                <input type="text" placeholder="Name" name="name" class="form-control" id="name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Date</label>
-                                <input type="text" placeholder="date" name="date" class="form-control">
-                            </div>
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Description</label>
                                 <textarea class="form-control" id="deskripsi" name="description" rows="3"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Photo</label>
-                                <input type="text" class="form-control" name="photo" placeholder="photo" id="exampleInputPassword1">
+                                <label for="formFile" class="form-label">Photo</label>
+                                <input class="form-control" type="file" name="photo" id="formFile">
                             </div>
+
                             <button type="submit" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Add data</button>
                         </form>
                     </div>
@@ -53,9 +47,5 @@
 
 
 @section('scripts')
-<script>
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-</script>
+
 @endsection

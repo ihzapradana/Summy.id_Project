@@ -16,6 +16,13 @@ class LaporanController extends Controller
         return view('laporan.index', ['title' => $title, 'laporans' => $laporan]);
     }
 
+    public function detail($id)
+    {
+        $laporan = Laporan::with(['user'])->find($id);
+        $title = "Detail Laporans";
+        return view('laporan.detail', ['title' => $title, 'laporans' => $laporan]);
+    }
+
     public function tambah()
     {
         $title = "Laporan";
@@ -26,18 +33,19 @@ class LaporanController extends Controller
     {
         $data = $request->all();
         $valid = Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'date' => ['required', 'string'],
             'description' => ['required', 'string'],
             'photo' => ['required', 'string'],
         ]);
-
-        $laporan = Laporan::create([
-            'name' => $data['name'],
-            'date' => $data['date'],
-            'description' => $data['description'],
-            'photo' => $data['photo'],
-        ]);
+        // dd($data['user_id']);
+        // upload
+        $file = $request->file('photo');
+        $file->move('images/photos',$file->getClientOriginalName());
+       
+        $laporan = new Laporan();
+        $laporan->user_id = $data['user_id'];
+        $laporan->description = $data['description'];
+        $laporan->photo = $file->getClientOriginalName();
+        $laporan->save();
     
         return back()->with('success', 'Data Berhasil diperbarui');
     }
@@ -53,13 +61,19 @@ class LaporanController extends Controller
     {
         $data = $request->all();
         $valid = Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'date' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'photo' => ['required', 'string'],
+            'photo' => ['required', 'string']
         ]);
+        $file = $request->file('photo');
+     
+        $file->move('images/photos',$file->getClientOriginalName());
+
+
         $laporan = Laporan::find($data['id']);
-        $laporan->update($data);
+        $laporan->update([
+            "description" =>  $data['description'],
+            "photo" => $file->getClientOriginalName()
+        ]);
         return back()->with('success', 'Data Berhasil diperbarui');
 
     }

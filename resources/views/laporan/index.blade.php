@@ -19,7 +19,9 @@
                                 {{ session()->get('success') }}
                             </div>
                         @endif
-                        <a href="/laporan/tambah" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Add</a>
+                        @if (Auth::user()->role == "petani")
+                            <a href="/laporan/tambah" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Add</a>
+                        @endif
                     </div>
                     <div class="card-body">
                         <table id="table_id" class="display">
@@ -38,17 +40,17 @@
                                 @foreach ($laporans as $laporan)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $laporan->name }}</td>
-                                    <td>{{ $laporan->date }}</td>
+                                    <td>{{ $laporan->user->name }}</td>
+                                    <td>{{ $laporan->created_at }}</td>
                                 
                                     <td>{{ substr($laporan->description, 0, 80 )}}...</td>
                                     <td>{{ $laporan->photo }}</td>
                                     <td class="text-center">
-                                        @if (Auth::user()->role == 'petani')
-                                            <a href="#" class="btn btn-primary">View More</a>
+                                        @if (Auth::user()->role == 'owner')
+                                            <a href="{{ route('laporan.detail',  $laporan->id) }}" class="btn btn-primary">View More</a>
                                         @else
-                                        <a href="{{ route('laporan.delete',  $laporan->id) }}" data-id="{{ $laporan->id }}" class="text-danger fw-bolder"><i class="bi bi-trash3-fill"></i></a> | 
-                                        <a href="{{ route('laporan.edit',  $laporan->id) }}" data-id="{{ $laporan->id }}" class="text-primary fw-bolder"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="{{ route('laporan.delete',  $laporan->id) }}" data-id="{{ $laporan->id }}" class="text-danger fw-bolder"><i class="bi bi-trash3-fill"></i></a> | 
+                                            <a href="{{ route('laporan.edit',  $laporan->id) }}" data-id="{{ $laporan->id }}" class="text-primary fw-bolder"><i class="bi bi-pencil-square"></i></a>
                                         @endif
                                     </td>
             
