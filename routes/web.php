@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PemasukanController;
+use App\Http\Controllers\PengeluaranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,18 @@ Route::name('petani.')->middleware('auth')->group(function () {
     Route::get('/petani/edit/{id}', [App\Http\Controllers\PetaniController::class, 'edit'])->name('edit');
     Route::post('/petani/store', [App\Http\Controllers\PetaniController::class, 'store'])->name('store');
     Route::post('/petani/update', [App\Http\Controllers\PetaniController::class, 'update'])->name('update');
+});
+
+Route::name('pemasukan.')->middleware('auth')->group(function () {
+    Route::get('/pemasukan', [PemasukanController::class, 'index'])->name('index');
+    Route::get('/pemasukan/tambah', [PemasukanController::class, 'tambah'])->name('tambah');
+    Route::post('/pemasukan/store', [PemasukanController::class, 'store'])->name('store');
+});
+
+Route::name('pengeluaran.')->middleware('auth')->group(function () {
+    Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('index');
+    Route::get('/pengeluaran/tambah', [PengeluaranController::class, 'tambah'])->name('tambah');
+    Route::post('/pengeluaran/store', [PengeluaranController::class, 'store'])->name('store');
 });
 
 Route::name('laporan.')->middleware('auth')->group(function () {
