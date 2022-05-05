@@ -24,23 +24,23 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">NAME</label>
-                                <input type="text" placeholder="Name" name="name" class="form-control" id="name">
+                                <input type="text" placeholder="Name" name="name" class="form-control" id="name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">USERNAME</label>
-                                <input type="text" placeholder="Username" name="username" class="form-control" id="name">
+                                <input type="text" placeholder="Username" name="username" class="form-control" id="name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" name="email" placeholder="Email" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="email" class="form-control" name="email" placeholder="Email" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Password" id="exampleInputPassword1">
+                                <input type="password" class="form-control" name="password" placeholder="Password" id="exampleInputPassword1" required>
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">PHONE</label>
-                                <input type="text" placeholder="Phone" class="form-control" name="phone" id="phone">
+                                <input type="text" placeholder="Phone" class="form-control" name="phone" id="phone" required>
                             </div>
                             <button type="submit" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Add data</button>
                         </form>

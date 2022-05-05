@@ -12,7 +12,7 @@ class PetaniController extends Controller
 {
     public function index()
     {
-        $user = User::get();
+        $user = User::where('role', 'petani')->get();
         $title = "Petani";
         return view('petani.index', ['user' => $user, 'title' => $title]);
     }
@@ -46,9 +46,12 @@ class PetaniController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'role' => 'petani',
         ]);
 
-        return redirect('petani')->with('success', 'Data Berhasil ditambah');;
+        // dd($user);
+
+        return redirect('petani')->with('success', 'Data Berhasil ditambahs');;
     }
 
     public function update(Request $request)
