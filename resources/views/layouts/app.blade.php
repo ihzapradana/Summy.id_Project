@@ -68,6 +68,16 @@
 							</a>
 						</li>
 					@endif
+
+					
+					@if (Auth::user()->role == 'owner')						
+						<li class="sidebar-item @if (Route::is('pendapatan.*')) active @endif">
+							<a class="sidebar-link" href="{{ Route('pendapatan.index') }}">
+								<i class="align-middle" data-feather="sliders"></i> <span
+									class="align-middle">Pendapatan</span>
+							</a>
+						</li>
+					@endif
 					
 					@if (Auth::user()->role == 'owner')						
 						<li class="sidebar-item @if (Route::is('petani.*')) active @endif">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keuangan;
+use App\Models\Pendapatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -12,13 +13,6 @@ class PengeluaranController extends Controller
 {
     public function index()
     {  
-        $now = Carbon::now();
-        // dd($now->format('Y-m-d'));
-        $pengeluaran = DB::table("keuangans")->where('created_at', "01");
-        // foreach($pengeluaran as $p){
-        //     echo $p->tanggal;
-        // }
-        dd($pengeluaran);
         $title = "Pengeluaran Keuangan";
         $data = Keuangan::where("jenis", "credit")->get();
         return view("pengeluaran.index", ['title' => $title, "data" => $data]);
@@ -38,7 +32,9 @@ class PengeluaranController extends Controller
             "nominal" => ['string', 'required'],
             "keterangan" => ['string'],
         ]);
-        $tanggal = explode("-", $data["tanggal"])[2];
+
+        $date = explode("-", $data["tanggal"]);
+        $tanggal = $date[2];
         $tanggal = (int)$tanggal;
         if($tanggal >= 1 && $tanggal <= 7)
         {
@@ -62,9 +58,65 @@ class PengeluaranController extends Controller
         $keuangan->jenis = "credit";
         $keuangan->keterangan = $data["keterangan"];
         $keuangan->save();
+
+
+
+
+        $jumlah = DB::table('pendapatans')
+        ->whereMonth('tanggal', $date[1])
+        ->whereYear('tanggal', $date[0])
+        ->get();
+
+
+        if($jumlah->count() == 0){
+            $pendapatan = new Pendapatan();
+            $pendapatan->tanggal = $data["tanggal"];
+            $pendapatan->untung = 0;
+            $pendapatan->rugi = $data["nominal"];
+            $pendapatan->total =  $data["nominal"];
+            $pendapatan->save();
+            // echo "ok";
+            return back()->with("success", "Pendapatan berhasil ditambah");
+        }
+    
+        $old_data = $jumlah->last();
+        $pendapatans = Pendapatan::find( $old_data->id);
+
+        $date1 = Carbon::createFromFormat('Y-m-d', $data["tanggal"]);
+        $date2 = Carbon::createFromFormat('Y-m-d', $old_data->tanggal);
+        $untung = $old_data->untung;
+        $rugi = $old_data->rugi + $data["nominal"];
+        $pendapatans->update([
+            "tanggal" =>  $date1->gte($date2) ? $data['tanggal'] : $old_data->tanggal,
+            "rugi" =>  $rugi,
+            "total" => $untung - $rugi
+        ]);
+
         // dd($keuangan);
         return back()->with("success", "Pendapatan berhasil ditambah");
 
         // dd($tanggal);
+    }
+
+    public function delete($id)
+    {
+        $keuangan = Keuangan::find($id);
+        $date = explode("-", $keuangan->tanggal);
+        $pendapatan = DB::table('pendapatans')
+        ->whereMonth('tanggal', $date[1])
+        ->whereYear('tanggal', $date[0])
+        ->get()->last();
+
+        $update_pendapatan = Pendapatan::find($pendapatan->id);
+        $untung = $pendapatan->untung;
+        $rugi = $pendapatan->rugi - $keuangan->nominal;
+        $total = $untung - $rugi;
+        $update_pendapatan->update([
+            "rugi" => $rugi,
+            "total" => $total,
+        ]);
+        // dd($pendapatan);
+        $keuangan->delete();
+        return back()->with('success', 'Data Berhasil dihapus');
     }
 }

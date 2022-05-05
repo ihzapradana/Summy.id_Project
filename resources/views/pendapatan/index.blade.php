@@ -19,34 +19,35 @@
                                 {{ session()->get('success') }}
                             </div>
                         @endif
-                        <a href="{{ route('pemasukan.tambah') }}" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Add</a>
+                        <a href="/petani/tambah" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Add</a>
                     </div>
                     <div class="card-body">
                         <table id="table_id" class="display table table-hover">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal</th>
-                                    <th>Minggu ke-</th>
-                                    <th>Nominal</th>
-                                    <th>Keterangan</th>
-                                    <th>Action</th>
+                                    <th>Tahun</th>
+                                    <th>Bulan</th>
+                                    <th>Income</th>
+                                    <th>Outcome</th>
+                                    <th>Total</th>
+                                    {{-- <th>Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
-                                @foreach ($data as $dt)
+                                <?php $no = 1 ?>
+                                @foreach ($pendapatans as $pendapatan)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $dt->tanggal }}</td>
-                                    <td>{{ $dt->minggu }}</td>
-                                    <td>Rp. {{ number_format($dt->nominal,2,',','.') }}</td>
-                                    <td>{{ $dt->keterangan }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('pemasukan.delete',  $dt->id) }}" id="deletepemasukan" class="text-danger fw-bolder"><i class="bi bi-trash3-fill"></i></a>
-                                    </td>
+                                    <td>{{ explode('-', $pendapatan->tanggal)[0] }}</td>
+                                    <td>{{ explode('-', $pendapatan->tanggal)[1]  }}</td>
+                                    <td>{{ $pendapatan->untung }}</td>
+                                    <td>{{ $pendapatan->rugi }}</td>
+                                    <td>{{ $pendapatan->total }}</td>
+                                    {{-- <td class="text-center">
+                                       
+                                    </td> --}}
                                 </tr>
-
                                 @endforeach
                             </tbody>
                         </table>

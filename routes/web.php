@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PemasukanController;
+use App\Http\Controllers\PendapatanController;
 use App\Http\Controllers\PengeluaranController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,12 +43,20 @@ Route::name('pemasukan.')->middleware('auth')->group(function () {
     Route::get('/pemasukan', [PemasukanController::class, 'index'])->name('index');
     Route::get('/pemasukan/tambah', [PemasukanController::class, 'tambah'])->name('tambah');
     Route::post('/pemasukan/store', [PemasukanController::class, 'store'])->name('store');
+    Route::get('/pemasukan/delete/{id}', [PemasukanController::class, 'delete'])->name('delete');
 });
 
 Route::name('pengeluaran.')->middleware('auth')->group(function () {
     Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('index');
     Route::get('/pengeluaran/tambah', [PengeluaranController::class, 'tambah'])->name('tambah');
     Route::post('/pengeluaran/store', [PengeluaranController::class, 'store'])->name('store');
+    Route::get('/pengeluaran/delete/{id}', [PengeluaranController::class, 'delete'])->name('delete');
+});
+
+Route::name('pendapatan.')->middleware('auth')->group(function () {
+    Route::get('/pendapatan', [PendapatanController::class, 'index'])->name('index');
+    
+
 });
 
 Route::name('laporan.')->middleware('auth')->group(function () {

@@ -43,8 +43,7 @@
                                     <td>Rp. {{ number_format($dt->nominal,2,',','.') }}</td>
                                     <td>{{ $dt->keterangan }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('petani.delete',  $dt->id) }}" id="deletePetani" class="text-danger fw-bolder"><i class="bi bi-trash3-fill"></i></a> | 
-                                        <a href="{{ route('petani.edit',  $dt->id) }}" id="editPetani" class="text-primary fw-bolder"><i class="bi bi-pencil-square"></i></a>
+                                        <a href="{{ route('pengeluaran.delete',  $dt->id) }}" id="deletepengeluaran" class="text-danger fw-bolder"><i class="bi bi-trash3-fill"></i></a>
                                     </td>
                                 </tr>
 
