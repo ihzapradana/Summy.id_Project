@@ -59,6 +59,20 @@ Route::name('pendapatan.')->middleware('auth')->group(function () {
 
 });
 
+Route::name('product.')->middleware('auth')->group(function () {
+    Route::get('/product', [ProductController::class, 'index'])->name('index');
+    Route::get('/product/detail/{slug}', [ProductController::class, 'detail'])->name('detail');
+    Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+    Route::get('/product/tambah', [ProductController::class, 'tambah'])->name('tambah');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+    Route::post('/product/update', [ProductController::class, 'update'])->name('update');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('store');
+    Route::post('/product/checkout', [ProductController::class, 'checkout'])->name('checkout');
+    Route::get('/product/checkout/berhasil', [ProductController::class, 'success'])->name('success');
+    
+
+});
+
 Route::name('pesanan.')->middleware('auth')->group(function() {
     Route::get('/pesanan', [PemesananController::class, 'index'])->name('index');
     Route::get('/pesanan/edit/{invoice}', [PemesananController::class, 'edit'])->name('edit');
