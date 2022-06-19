@@ -25,11 +25,11 @@
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Description</label>
-                                <textarea class="form-control" id="deskripsi" name="description" rows="3"></textarea>
+                                <textarea required oninvalid="this.setCustomValidity('data harus diisi.')" oninput="setCustomValidity('')" class="form-control" id="deskripsi" name="description" rows="3"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Photo</label>
-                                <input class="form-control" type="file" name="photo" id="formFile">
+                                <input required oninvalid="this.setCustomValidity('data harus diisi.')" oninput="setCustomValidity('')" class="form-control" type="file" name="photo" id="formFile">
                             </div>
 
                             <button type="submit" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Add data</button>

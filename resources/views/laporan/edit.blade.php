@@ -26,12 +26,12 @@
 
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Description</label>
-                                <textarea class="form-control" id="deskripsi" name="description" rows="3">{{ $laporan->description }}</textarea>
+                                <textarea class="form-control" id="deskripsi" name="description" rows="3">{{ $laporan->description }}</textarea required oninvalid="this.setCustomValidity('data harus diisi.')" oninput="setCustomValidity('')">
                             </div>
                             <img src="{{ asset('images/photos/'.$laporan->photo) }}" width="200" class="img-thumbnail" alt="">
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Photo</label>
-                                <input class="form-control" type="file" name="photo" id="formFile">
+                                <input class="form-control" type="file" name="photo" id="formFile" required oninvalid="this.setCustomValidity('data harus diisi.')" oninput="setCustomValidity('')">
                             </div>
                             <button type="submit" class="btn btn-primary float-end">Edit data</button>
                         </form>

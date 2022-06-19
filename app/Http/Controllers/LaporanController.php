@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Laporan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LaporanController extends Controller
@@ -12,7 +13,11 @@ class LaporanController extends Controller
     public function index()
     {
         $title = "Laporan";
-        $laporan = Laporan::get();
+        if(Auth::user()->role == 'owner'){
+            $laporan = Laporan::get();
+        }else{
+            $laporan = Laporan::where('user_id', Auth::user()->id)->get();
+        }
         return view('laporan.index', ['title' => $title, 'laporans' => $laporan]);
     }
 
@@ -36,8 +41,7 @@ class LaporanController extends Controller
             'description' => ['required', 'string'],
             'photo' => ['required', 'string'],
         ]);
-        // dd($data['user_id']);
-        // upload
+
         $file = $request->file('photo');
         $file->move('images/photos',$file->getClientOriginalName());
        
@@ -47,7 +51,7 @@ class LaporanController extends Controller
         $laporan->photo = $file->getClientOriginalName();
         $laporan->save();
     
-        return back()->with('success', 'Data Berhasil diperbarui');
+        return back()->with('success', 'Data Berhasil ditambahkan');
     }
 
     public function edit($id)
