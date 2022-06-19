@@ -15,11 +15,9 @@ class CreateKeuangansTable extends Migration
     {
         Schema::create('keuangans', function (Blueprint $table) {
             $table->id();
-            $table->string("tanggal");
-            $table->string("minggu");
-            $table->enum("jenis", ["debit", "credit"]);
-            $table->string("keterangan")->nullable();
-            $table->integer("nominal");
+            // $table->string('tanggal');
+            $table->string('tahun');
+            $table->string('bulan');
             $table->timestamps();
         });
     }
