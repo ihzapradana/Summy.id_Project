@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Keuangan extends Model
+class Pemesanan extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function detail(){
-        return $this->hasMany(KeuanganDetail::class, 'keuangan_id', 'id');
+    public function product()
+    {
+        return $this->hasOne(Produk::class, 'id', 'id_product');
     }
 }
-

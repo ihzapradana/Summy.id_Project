@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pendapatan extends Model
+class Produk extends Model
 {
     use HasFactory;
-    protected $fillable = ['tanggal', 'untung', 'rugi', 'total'];
+    protected $fillable = ['nama', 'deskripsi', 'foto', 'harga', 'slug'];
 }

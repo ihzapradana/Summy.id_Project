@@ -59,6 +59,12 @@ Route::name('pendapatan.')->middleware('auth')->group(function () {
 
 });
 
+Route::name('pesanan.')->middleware('auth')->group(function() {
+    Route::get('/pesanan', [PemesananController::class, 'index'])->name('index');
+    Route::get('/pesanan/edit/{invoice}', [PemesananController::class, 'edit'])->name('edit');
+    Route::post('/pesanan/update', [PemesananController::class, 'update'])->name('update');
+});
+
 Route::name('laporan.')->middleware('auth')->group(function () {
     Route::get('/laporan', [LaporanController::class, 'index'])->name('index');
     Route::get('/laporan/tambah', [LaporanController::class, 'tambah'])->name('tambah');
